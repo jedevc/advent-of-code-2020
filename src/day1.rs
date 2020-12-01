@@ -1,34 +1,35 @@
-use std::fs;
 use std::cmp::Ordering;
+use std::fs;
 
 lazy_static! {
-    static ref REPORT: ExpenseReport = ExpenseReport::new();
+    static ref DATA: Vec<i32> = fs::read_to_string("input/day1/expense-report.txt")
+        .expect("could not open file")
+        .split("\n")
+        .filter_map(|line| line.parse::<i32>().ok())
+        .collect();
 }
 
 pub fn solve() {
+    let report = ExpenseReport::new(&DATA);
     println!("----- part 1 -----");
-    REPORT.repair();
+    report.repair();
     println!();
 
     println!("----- part 2 -----");
-    REPORT.repair3();
+    report.repair3();
     println!();
 }
 
 struct ExpenseReport {
-    nums: Vec<i32>
+    nums: Vec<i32>,
 }
 
 impl ExpenseReport {
-    fn new() -> ExpenseReport {
-        let mut nums: Vec<i32> =
-            fs::read_to_string("input/day1/expense-report.txt").expect("could not open file")
-            .split("\n")
-            .filter_map(|line| line.parse::<i32>().ok())
-            .collect();
+    fn new(data: &[i32]) -> ExpenseReport {
+        let mut nums = data.to_vec();
         nums.sort();
 
-        ExpenseReport{nums}
+        ExpenseReport { nums }
     }
 
     fn repair(&self) {
@@ -46,8 +47,14 @@ impl ExpenseReport {
             let numslice = &self.nums[k + 1..];
             if let Some((i, j)) = find_pair(numslice, 2020 - self.nums[k]) {
                 let solution = self.nums[k] * numslice[i] * numslice[j];
-                println!("{} + {} + {} = {}", self.nums[k], numslice[i], numslice[j], 2020);
-                println!("{} x {} x {} = {}", self.nums[k], numslice[i], numslice[j], solution);
+                println!(
+                    "{} + {} + {} = {}",
+                    self.nums[k], numslice[i], numslice[j], 2020
+                );
+                println!(
+                    "{} x {} x {} = {}",
+                    self.nums[k], numslice[i], numslice[j], solution
+                );
                 return;
             }
         }
@@ -63,7 +70,7 @@ fn find_pair(nums: &[i32], target: i32) -> Option<(usize, usize)> {
         match sum.cmp(&target) {
             Ordering::Equal => {
                 return Some((i, j));
-            },
+            }
             Ordering::Less => i += 1,
             Ordering::Greater => j -= 1,
         }

@@ -26,7 +26,10 @@ fn main() {
         .get_matches();
 
     let solver_name = matches.value_of("solver").unwrap();
-    let repeats = matches.value_of("repeat").map(|x| x.parse::<i32>().unwrap_or(1)).unwrap_or(1);
+    let repeats = matches
+        .value_of("repeat")
+        .map(|x| x.parse::<i32>().unwrap_or(1))
+        .unwrap_or(1);
 
     match SOLVERS.get(solver_name) {
         Some(solver) => {
@@ -35,8 +38,12 @@ fn main() {
                 solver();
             }
             let nanos = now.elapsed().unwrap().as_nanos();
-            eprintln!("time = {}.{:0>9}", nanos / 1_000_000_000, nanos % 1_000_000_000)
-        },
+            eprintln!(
+                "time = {}.{:0>9}",
+                nanos / 1_000_000_000,
+                nanos % 1_000_000_000
+            )
+        }
         None => {
             eprintln!("No such solver with name '{}'\n", solver_name);
             eprintln!("Available solvers:");
