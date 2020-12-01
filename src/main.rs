@@ -7,6 +7,7 @@ use clap::App;
 mod day1;
 
 use std::collections::HashMap;
+use std::time::SystemTime;
 
 lazy_static! {
     static ref SOLVERS: HashMap<&'static str, fn()> = {
@@ -21,17 +22,26 @@ fn main() {
         .author("Justin Chadwell <me@jedevc.com>")
         .about("Solvers for Advent of Code 2020")
         .arg_from_usage("<solver> 'solver to invoke'")
+        .arg_from_usage("--repeat [repeats] 'number of times to repeat'")
         .get_matches();
 
     let solver_name = matches.value_of("solver").unwrap();
+    let repeats = matches.value_of("repeat").map(|x| x.parse::<i32>().unwrap_or(1)).unwrap_or(1);
 
     match SOLVERS.get(solver_name) {
-        Some(solver) => solver(),
+        Some(solver) => {
+            let now = SystemTime::now();
+            for _ in 0..repeats {
+                solver();
+            }
+            let nanos = now.elapsed().unwrap().as_nanos();
+            eprintln!("time = {}.{:0>9}", nanos / 1_000_000_000, nanos % 1_000_000_000)
+        },
         None => {
-            println!("No such solver with name '{}'\n", solver_name);
-            println!("Available solvers:");
+            eprintln!("No such solver with name '{}'\n", solver_name);
+            eprintln!("Available solvers:");
             for key in SOLVERS.keys() {
-                println!("- {}", key);
+                eprintln!("- {}", key);
             }
         }
     }

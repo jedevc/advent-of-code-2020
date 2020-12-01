@@ -1,16 +1,18 @@
 use std::fs;
 use std::cmp::Ordering;
 
+lazy_static! {
+    static ref REPORT: ExpenseReport = ExpenseReport::new();
+}
+
 pub fn solve() {
-    let report = ExpenseReport::new();
-
     println!("----- part 1 -----");
-    report.repair();
-
+    REPORT.repair();
     println!();
 
     println!("----- part 2 -----");
-    report.repair3();
+    REPORT.repair3();
+    println!();
 }
 
 struct ExpenseReport {
