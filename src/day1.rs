@@ -28,7 +28,6 @@ impl ExpenseReport {
     fn new(data: &[i32]) -> ExpenseReport {
         let mut nums = data.to_vec();
         nums.sort();
-
         ExpenseReport { nums }
     }
 

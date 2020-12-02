@@ -4,15 +4,17 @@ extern crate lazy_static;
 extern crate clap;
 use clap::App;
 
-mod day1;
-
 use std::collections::HashMap;
 use std::time::SystemTime;
+
+mod day1;
+mod day2;
 
 lazy_static! {
     static ref SOLVERS: HashMap<&'static str, fn()> = {
         let mut m = HashMap::new();
         m.insert("day1", day1::solve as fn());
+        m.insert("day2", day2::solve as fn());
         m
     };
 }
