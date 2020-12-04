@@ -33,19 +33,18 @@ lazy_static! {
 }
 
 pub fn solve() {
-    let checked: Vec<&Passport> = DATA.iter().filter(|p| check_passport(&p)).collect();
-    let validated: Vec<&Passport> = checked
-        .iter()
-        .map(|p| *p)
-        .filter(|p| validate_passport(&p))
-        .collect();
-
     println!("----- part 1 -----");
-    println!("count: {}", checked.len());
+    let checked = DATA.iter().filter(|p| check_passport(&p)).count();
+    println!("count: {}", checked);
     println!();
 
     println!("----- part 2 -----");
-    println!("count: {}", validated.len());
+    let validated = DATA
+        .iter()
+        .filter(|p| check_passport(&p))
+        .filter(|p| validate_passport(&p))
+        .count();
+    println!("count: {}", validated);
     println!();
 }
 
