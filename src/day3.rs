@@ -21,6 +21,7 @@ pub fn solve() {
         .map(|(y, x)| slope(*y, *x))
         .fold(1, |a, b| a * b);
     println!("product: {}", product);
+    println!();
 }
 
 fn slope(y: usize, x: usize) -> usize {
