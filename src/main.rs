@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate lazy_static;
 
+extern crate regex;
+
 extern crate clap;
 use clap::App;
 
@@ -10,6 +12,7 @@ use std::time::SystemTime;
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 lazy_static! {
     static ref SOLVERS: HashMap<&'static str, fn()> = {
@@ -17,6 +20,7 @@ lazy_static! {
         m.insert("day1", day1::solve as fn());
         m.insert("day2", day2::solve as fn());
         m.insert("day3", day3::solve as fn());
+        m.insert("day4", day4::solve as fn());
         m
     };
 }
