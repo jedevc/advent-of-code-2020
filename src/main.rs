@@ -1,3 +1,5 @@
+#![feature(iterator_fold_self)]
+
 #[macro_use]
 extern crate lazy_static;
 
@@ -14,6 +16,7 @@ mod day2;
 mod day3;
 mod day4;
 mod day5;
+mod day6;
 
 lazy_static! {
     static ref SOLVERS: HashMap<&'static str, fn()> = {
@@ -23,6 +26,7 @@ lazy_static! {
         m.insert("day3", day3::solve as fn());
         m.insert("day4", day4::solve as fn());
         m.insert("day5", day5::solve as fn());
+        m.insert("day6", day6::solve as fn());
         m
     };
 }
