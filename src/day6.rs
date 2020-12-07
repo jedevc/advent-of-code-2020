@@ -27,7 +27,7 @@ where
 macro_rules! transformer {
     ($callable:expr, $method:expr) => {
         transform($callable, |a, b| Box::new($method(a, b)))
-    }
+    };
 }
 
 pub fn solve() {
