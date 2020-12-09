@@ -10,18 +10,16 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     println!("trees: {}", slope(1, 3));
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     let product = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
         .iter()
         .map(|(y, x)| slope(*y, *x))
         .fold(1, |a, b| a * b);
     println!("product: {}", product);
-    println!();
 }
 
 fn slope(y: usize, x: usize) -> usize {

@@ -30,22 +30,20 @@ macro_rules! transformer {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let sum: usize = DATA
         .iter()
         .map(|group| transformer!(group, HashSet::union))
         .map(|h| h.len())
         .sum();
     println!("sum: {}", sum);
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     let sum: usize = DATA
         .iter()
         .map(|group| transformer!(group, HashSet::intersection))
         .map(|h| h.len())
         .sum();
     println!("sum: {}", sum);
-    println!();
 }

@@ -10,12 +10,12 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let (_, acc) = emulate(&DATA);
     println!("acc was {}", acc);
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     for i in 0..DATA.len() {
         let replaced = match DATA[i] {
             Opcode::Nop(n) => Opcode::Jmp(n),
@@ -34,8 +34,6 @@ pub fn solve() {
             println!("acc was {}", acc);
         }
     }
-
-    println!();
 }
 
 fn emulate(program: &[Opcode]) -> (bool, isize) {

@@ -10,13 +10,12 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let max_id = DATA.iter().map(|bp| bp.id()).max().unwrap();
     println!("max id: {}", max_id);
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     let mut seating_map = [false; 8 * 128];
     for bp in DATA.iter() {
         seating_map[bp.id() as usize] = true;
@@ -30,7 +29,6 @@ pub fn solve() {
             break;
         }
     }
-    println!();
 }
 
 #[derive(Debug)]

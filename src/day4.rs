@@ -32,20 +32,18 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let checked = DATA.iter().filter(|p| check_passport(&p)).count();
     println!("count: {}", checked);
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     let validated = DATA
         .iter()
         .filter(|p| check_passport(&p))
         .filter(|p| validate_passport(&p))
         .count();
     println!("count: {}", validated);
-    println!();
 }
 
 fn parse_passport<'a>(parts: impl Iterator<Item = &'a str>) -> Passport {

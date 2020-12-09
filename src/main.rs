@@ -22,17 +22,17 @@ mod day8;
 mod day9;
 
 lazy_static! {
-    static ref SOLVERS: HashMap<&'static str, fn()> = {
+    static ref SOLVERS: HashMap<&'static str, (fn(), fn())> = {
         let mut m = HashMap::new();
-        m.insert("day1", day1::solve as fn());
-        m.insert("day2", day2::solve as fn());
-        m.insert("day3", day3::solve as fn());
-        m.insert("day4", day4::solve as fn());
-        m.insert("day5", day5::solve as fn());
-        m.insert("day6", day6::solve as fn());
-        m.insert("day7", day7::solve as fn());
-        m.insert("day8", day8::solve as fn());
-        m.insert("day9", day9::solve as fn());
+        m.insert("day1", (day1::solve1 as fn(), day1::solve2 as fn()));
+        m.insert("day2", (day2::solve1 as fn(), day2::solve2 as fn()));
+        m.insert("day3", (day3::solve1 as fn(), day3::solve2 as fn()));
+        m.insert("day4", (day4::solve1 as fn(), day4::solve2 as fn()));
+        m.insert("day5", (day5::solve1 as fn(), day5::solve2 as fn()));
+        m.insert("day6", (day6::solve1 as fn(), day6::solve2 as fn()));
+        m.insert("day7", (day7::solve1 as fn(), day7::solve2 as fn()));
+        m.insert("day8", (day8::solve1 as fn(), day8::solve2 as fn()));
+        m.insert("day9", (day9::solve1 as fn(), day9::solve2 as fn()));
         m
     };
 }
@@ -48,21 +48,18 @@ fn main() {
     let solver_name = matches.value_of("solver").unwrap();
     let repeats = matches
         .value_of("repeat")
-        .map(|x| x.parse::<i32>().unwrap_or(1))
+        .map(|x| x.parse::<usize>().unwrap_or(1))
         .unwrap_or(1);
 
     match SOLVERS.get(solver_name) {
-        Some(solver) => {
-            let now = SystemTime::now();
-            for _ in 0..repeats {
-                solver();
-            }
-            let nanos = now.elapsed().unwrap().as_nanos();
-            eprintln!(
-                "time = {}.{:0>9}",
-                nanos / 1_000_000_000,
-                nanos % 1_000_000_000
-            )
+        Some((solver1, solver2)) => {
+            println!("----- part 1 -----");
+            exec_timed(*solver1, repeats);
+
+            println!();
+
+            println!("----- part 2 -----");
+            exec_timed(*solver2, repeats);
         }
         None => {
             eprintln!("No such solver with name '{}'\n", solver_name);
@@ -72,4 +69,17 @@ fn main() {
             }
         }
     }
+}
+
+fn exec_timed(target: fn(), repeats: usize) {
+    let now = SystemTime::now();
+    for _ in 0..repeats {
+        target();
+    }
+    let nanos = now.elapsed().unwrap().as_nanos();
+    eprintln!(
+        "time = {}.{:0>9}",
+        nanos / 1_000_000_000,
+        nanos % 1_000_000_000
+    )
 }

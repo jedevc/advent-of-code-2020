@@ -9,15 +9,14 @@ lazy_static! {
         .collect();
 }
 
-pub fn solve() {
+pub fn solve1() {
     let report = ExpenseReport::new(&DATA);
-    println!("----- part 1 -----");
     report.repair();
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
+    let report = ExpenseReport::new(&DATA);
     report.repair3();
-    println!();
 }
 
 struct ExpenseReport {

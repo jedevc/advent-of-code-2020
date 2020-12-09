@@ -13,8 +13,7 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let mut xmas = XMAS::new();
     let mut invalid = 0;
     for n in DATA.iter() {
@@ -24,9 +23,18 @@ pub fn solve() {
         }
     }
     println!("invalid number: {}", invalid);
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
+    let mut xmas = XMAS::new();
+    let mut invalid = 0;
+    for n in DATA.iter() {
+        if !xmas.feed(*n) {
+            invalid = *n;
+            break;
+        }
+    }
+
     let mut weakness = 0;
     for (i, x) in DATA.iter().enumerate() {
         let mut sum = *x;
@@ -42,7 +50,6 @@ pub fn solve() {
         }
     }
     println!("weakness: {}", weakness);
-    println!();
 }
 
 struct XMAS {

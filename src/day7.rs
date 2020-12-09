@@ -21,16 +21,14 @@ lazy_static! {
     };
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     let containers = containing_closure("shiny gold");
     println!("containers: {}", containers.len());
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     let bag_count = count_bags("shiny gold");
     println!("bag count: {}", bag_count);
-    println!();
 }
 
 #[derive(Debug)]

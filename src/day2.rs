@@ -30,14 +30,12 @@ struct Spec {
     password: String,
 }
 
-pub fn solve() {
-    println!("----- part 1 -----");
+pub fn solve1() {
     check_count_policy();
-    println!();
+}
 
-    println!("----- part 2 -----");
+pub fn solve2() {
     check_index_policy();
-    println!();
 }
 
 pub fn check_count_policy() {
