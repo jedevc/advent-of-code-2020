@@ -21,18 +21,24 @@ mod day7;
 mod day8;
 mod day9;
 
+macro_rules! solvers {
+    ($day:ident) => {
+        ($day::solve1 as fn(), $day::solve2 as fn())
+    };
+}
+
 lazy_static! {
     static ref SOLVERS: HashMap<&'static str, (fn(), fn())> = {
         let mut m = HashMap::new();
-        m.insert("day1", (day1::solve1 as fn(), day1::solve2 as fn()));
-        m.insert("day2", (day2::solve1 as fn(), day2::solve2 as fn()));
-        m.insert("day3", (day3::solve1 as fn(), day3::solve2 as fn()));
-        m.insert("day4", (day4::solve1 as fn(), day4::solve2 as fn()));
-        m.insert("day5", (day5::solve1 as fn(), day5::solve2 as fn()));
-        m.insert("day6", (day6::solve1 as fn(), day6::solve2 as fn()));
-        m.insert("day7", (day7::solve1 as fn(), day7::solve2 as fn()));
-        m.insert("day8", (day8::solve1 as fn(), day8::solve2 as fn()));
-        m.insert("day9", (day9::solve1 as fn(), day9::solve2 as fn()));
+        m.insert("day1", solvers!(day1));
+        m.insert("day2", solvers!(day2));
+        m.insert("day3", solvers!(day3));
+        m.insert("day4", solvers!(day4));
+        m.insert("day5", solvers!(day5));
+        m.insert("day6", solvers!(day6));
+        m.insert("day7", solvers!(day7));
+        m.insert("day8", solvers!(day8));
+        m.insert("day9", solvers!(day9));
         m
     };
 }

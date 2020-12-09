@@ -13,7 +13,7 @@ lazy_static! {
     };
 }
 
-fn transform<'b, F>(group: &Vec<String>, f: F) -> HashSet<char>
+fn transform<F>(group: &Vec<String>, f: F) -> HashSet<char>
 where
     F: for<'a> Fn(&'a HashSet<char>, &'a HashSet<char>) -> Box<dyn Iterator<Item = &'a char> + 'a>,
 {
