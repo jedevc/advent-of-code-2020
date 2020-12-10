@@ -12,6 +12,7 @@ use std::collections::HashMap;
 use std::time::SystemTime;
 
 mod day1;
+mod day10;
 mod day2;
 mod day3;
 mod day4;
@@ -39,6 +40,7 @@ lazy_static! {
         m.insert("day7", solvers!(day7));
         m.insert("day8", solvers!(day8));
         m.insert("day9", solvers!(day9));
+        m.insert("day10", solvers!(day10));
         m
     };
 }

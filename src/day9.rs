@@ -45,7 +45,7 @@ pub fn solve2() {
                 let min = range.iter().min().unwrap();
                 let max = range.iter().max().unwrap();
                 weakness = min + max;
-                break
+                break;
             }
         }
     }
@@ -58,7 +58,9 @@ struct XMAS {
 
 impl XMAS {
     fn new() -> XMAS {
-        XMAS { queue: VecDeque::new() }
+        XMAS {
+            queue: VecDeque::new(),
+        }
     }
 
     fn check(&self, n: usize) -> bool {
@@ -76,7 +78,7 @@ impl XMAS {
     fn feed(&mut self, n: usize) -> bool {
         if self.queue.len() == 25 {
             if self.check(n) == false {
-                return false
+                return false;
             }
             self.queue.pop_front();
         }
