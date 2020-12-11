@@ -1,4 +1,4 @@
-#![feature(iterator_fold_self)]
+#![feature(iterator_fold_self, min_const_generics)]
 
 #[macro_use]
 extern crate lazy_static;
@@ -13,6 +13,7 @@ use std::time::SystemTime;
 
 mod day1;
 mod day10;
+mod day11;
 mod day2;
 mod day3;
 mod day4;
@@ -41,6 +42,7 @@ lazy_static! {
         m.insert("day8", solvers!(day8));
         m.insert("day9", solvers!(day9));
         m.insert("day10", solvers!(day10));
+        m.insert("day11", solvers!(day11));
         m
     };
 }
