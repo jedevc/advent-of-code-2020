@@ -46,4 +46,3 @@ fn satisfy((a1, b1): (usize, usize), (a2, b2): (usize, usize)) -> (usize, usize)
         n += b1;
     }
 }
-

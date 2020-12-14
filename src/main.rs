@@ -16,6 +16,7 @@ mod day10;
 mod day11;
 mod day12;
 mod day13;
+mod day14;
 mod day2;
 mod day3;
 mod day4;
@@ -47,6 +48,7 @@ lazy_static! {
         m.insert("day11", solvers!(day11));
         m.insert("day12", solvers!(day12));
         m.insert("day13", solvers!(day13));
+        m.insert("day14", solvers!(day14));
         m
     };
 }
